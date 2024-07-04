@@ -10,10 +10,8 @@ In order to compile the code, please download the NVIDIA HPC Software Developmen
 https://developer.nvidia.com/hpc-sdk
 
 If you are using WSL2, you need to add the following lines to your bashrc file:
-'''
-export PATH="$PATH:/opt/nvidia/hpc_sdk/Linux_x86_64/23.11/compilers/bin/"
-export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
-'''
+' export PATH="$PATH:/opt/nvidia/hpc_sdk/Linux_x86_64/23.11/compilers/bin/"
+export LD_LIBRARY_PATH="/usr/lib/wsl/lib/" '
 
 To compile and run the code open a terminal and run:
 '''
