@@ -5,7 +5,9 @@ This is a simple Lattice Boltzmann Method CFD code that offloads computations to
 It solves the 2D flow of two tandem cylinders by using the D2Q9 lattice model with Single-Relaxation-Time (SRT). 
 The use of directive-based OpenMP API in the code allows portability to any supported accelerator. 
 The main objective of this project is to serve as an open-source reference for GPU offloading implementation when developing Lattice Boltzmann Method.
- 
+
+ ![U_field](https://github.com/francescoornano/lattice-boltzmann-gpu/assets/102365359/e3bf445f-61e6-4e92-85eb-e0c05b500986)
+
 In order to compile the code, please download the NVIDIA HPC Software Development Kit at: 
 https://developer.nvidia.com/hpc-sdk
 
