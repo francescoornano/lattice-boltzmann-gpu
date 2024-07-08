@@ -85,13 +85,13 @@ int main() {
    
     // arrays useful for inlet BC
     int col[n-2];
-    float y_phys[n-2];
+    float yp[n-2];
     
     float cu;
     int i, j, k;
     
      // copy arrays to device 
-     #pragma omp target enter data map(to: fIn, fOut, fEq, u, rho, isSolid, e, opp, t, col, y_phys) device(0)
+     #pragma omp target enter data map(to: fIn, fOut, fEq, u, rho, isSolid, e, opp, t, col, yp) device(0)
      
   
     //Build lattice geometry
@@ -156,11 +156,11 @@ int main() {
     for (size_t l = 0; l < L; ++l)
     {
         col[l] = l + 1;
-        y_phys[l] = static_cast<float>(col[l] - 0.5f);
+        yp[l] = static_cast<float>(col[l] - 0.5f);
     }
     
-    // update col and y_phys to device memory 
-    #pragma omp target update to(col, y_phys) device(0)
+    // update col and yp to device memory 
+    #pragma omp target update to(col, yp) device(0)
     
 
 // Time loop
@@ -177,7 +177,7 @@ for (int simTime = 0; simTime < minIt; simTime++)
        idx = col[i];
        
        // Inlet: Pousille BC
-       u[idx*m*dDim] = 4. * uMax / (L*L) * (y_phys[i]*L - y_phys[i]*y_phys[i]);
+       u[idx*m*dDim] = 4. * uMax / (L*L) * (yp[i]*L - yp[i]*yp[i]);
        u[1 + idx*m*dDim] = 0.; 
        rho[idx*m] = 1. / (1. - u[idx*m*dDim]) * (fIn[idx*m*qDim]  
                        + fIn[2 + idx*m*qDim] 
@@ -382,5 +382,4 @@ for (int simTime = 0; simTime < minIt; simTime++)
 
     return 0;
 }
-
 
